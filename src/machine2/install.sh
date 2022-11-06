@@ -1,5 +1,11 @@
 #!/bin/bash
 
+#
+## script de mise en place d'une machine dans le cadre d'un projet
+## de realisation d'un CTF. Ce scipt a etais realise pour un machine
+## debian-10.
+#
+
 cl_black="\033[1;30m"
 cl_red="\033[1;31m"
 cl_green="\033[1;32m"
@@ -92,7 +98,6 @@ delete_file_or_directory() {
 		fi
 	fi
 }
-
 
 echo "$cl_blue Debut du script d'installation de la seconde machine$cl_df"
 
