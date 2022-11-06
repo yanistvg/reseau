@@ -6,6 +6,11 @@
 ## debian-10.
 #
 
+# Cette variable est presente pour choisir une deux deux machine a installer
+#  : 1 -> installer la premiere machine
+#  : 2 -> installer la seconde machine
+machine="1"
+
 cl_black="\033[1;30m"
 cl_red="\033[1;31m"
 cl_green="\033[1;32m"
@@ -191,16 +196,15 @@ delete_file_or_directory() {
 	fi
 }
 
-install_package "ssh"
+echo "$cl_blue Installation de la machine $machine$cl_df"
 install_package "git"
-
 clone_repos_from_github
 
+sh "/tmp/reseau/src/machine$machine/install.sh"			# lancement du script de la machine choisie
+
 delete_package "git"
-# delete_package "ssh"
 
-echo "" > /root/.ssh/known_hosts		    # oublier la connection git
-
-delete_file_or_directory "/tmp/id_rsa"
-delete_file_or_directory "/tmp/reseau"	# repos du git
-delete_file_or_directory "$0"			      # auto-suppresion du script
+echo "" > /root/.ssh/known_hosts		    			# oublier la connection git
+delete_file_or_directory "/tmp/id_rsa"					# suppresion de la clef RSA
+delete_file_or_directory "/tmp/reseau"					# suppresion du repos du git
+delete_file_or_directory "$0"			      			# auto-suppresion du script
