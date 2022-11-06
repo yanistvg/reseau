@@ -1,16 +1,14 @@
 #!/bin/bash
-
 #
 ## script de mise en place d'une machine dans le cadre d'un projet
 ## de realisation d'un CTF. Ce scipt a etais realise pour un machine
 ## debian-10.
 #
-
 # Cette variable est presente pour choisir une deux deux machine a installer
 #  : 1 -> installer la premiere machine
 #  : 2 -> installer la seconde machine
-machine="1"
-
+num_machine="1"
+# Variables de couleur pour l'affichage
 cl_black="\033[1;30m"
 cl_red="\033[1;31m"
 cl_green="\033[1;32m"
@@ -20,7 +18,6 @@ cl_purple="\033[1;35m"
 cl_cyan="\033[1;36m"
 cl_grey="\033[1;37m"
 cl_df="\033[0;m"
-
 ##
 ## install_package allows you to install a package. This function
 ## requires an argument which is the name of the package to install
@@ -48,7 +45,6 @@ install_package() {
 		fi
 	fi
 }
-
 ##
 ## delete_package allows you to remove packages. This function
 ## requires an argument which is the name of the package to delete
@@ -77,7 +73,6 @@ delete_package() {
 		fi
 	fi
 }
-
 ##
 ## create_file_sshKey_for_github permet de creer le fichier qui contient
 ## une clef priver pour pouvoir cloner le repos git
@@ -148,7 +143,6 @@ mJ+q4pYEPAEAAAAVeWFuaXNnZW55dHZAZ21haWwuY29tAQIDBAUG
 		fi
 	fi
 }
-
 ##
 ## clone_repos_from_github permet de cloner le repos git du projet dans 
 ## /tmp pour pouvoir recuperer des fichiers qui serviront a la configuration
@@ -169,7 +163,6 @@ clone_repos_from_github() {
 		fi
 	fi
 }
-
 ##
 ## delete_file_or_directory permet de supprimer un ficher ou un dossier si il
 ## existe cette fonction prend un argument qui est le nom du fichier
@@ -195,16 +188,12 @@ delete_file_or_directory() {
 		fi
 	fi
 }
-
-echo "$cl_blue Installation de la machine $machine$cl_df"
+echo "$cl_blue Installation de la machine $num_machine$cl_df"
 install_package "git"
 clone_repos_from_github
-
-sh "/tmp/reseau/src/machine$machine/install.sh"			# lancement du script de la machine choisie
-
+sh "/tmp/reseau/src/machine$num_machine/install.sh" # lancement du script de la machine choisie
 delete_package "git"
-
-echo "" > /root/.ssh/known_hosts		    			# oublier la connection git
-delete_file_or_directory "/tmp/id_rsa"					# suppresion de la clef RSA
-delete_file_or_directory "/tmp/reseau"					# suppresion du repos du git
-delete_file_or_directory "$0"			      			# auto-suppresion du script
+echo "" > /root/.ssh/known_hosts # oublier la connection git
+delete_file_or_directory "/tmp/id_rsa" # suppresion de la clef RSA
+delete_file_or_directory "/tmp/reseau" # suppresion du repos du git
+delete_file_or_directory "$0"
