@@ -102,4 +102,9 @@ delete_file_or_directory() {
 
 echo "$cl_blue Debut du script d'installation de la seconde machine$cl_df"
 
+
 install_package "vsftpd"
+
+
+
+install_package "openssh-server"
