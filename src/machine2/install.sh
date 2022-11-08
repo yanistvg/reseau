@@ -99,7 +99,7 @@ delete_file_or_directory() {
 	fi
 }
 
+
 echo "$cl_blue Debut du script d'installation de la seconde machine$cl_df"
 
-
-
+install_package "vsftpd"
