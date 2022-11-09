@@ -102,9 +102,26 @@ delete_file_or_directory() {
 
 echo "$cl_blue Debut du script d'installation de la seconde machine$cl_df"
 
+## ssh config
 
-install_package "vsftpd"
-
-
+adduser sshuser
+echo -en "passwordforssh\npasswordforssh\n" | passwd sshuser
 
 install_package "openssh-server"
+
+
+## ftp config
+
+install_package "vsftpd"
+cp /etc/vsftpd.conf /etc/vsftpd.conf.orig
+rm /etc/vsftpd.conf
+cp vsftpd.conf /etc/vsftpd.conf
+adduser ftpuser
+echo -en "passftp1\npassftp1\n" | passwd ftpuser 
+echo "ftpuser" | sudo tee -a /etc/vsftpd.userlist
+systemctl restart vsftpd
+systemctl enable vsftpd
+
+
+
+## sed -i -e 's/\r$//' install.sh
