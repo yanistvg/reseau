@@ -1,7 +1,7 @@
 <?php
 	
 function connect_bdd() {
-	$conn = new mysqli('127.0.0.1', 'CTF_reseau_site', 'azerty18', 'CTF_reseau_site');
+	$conn = new mysqli('127.0.0.1', 'CTF_reseau_site', 'q9mChiFtU4YC2568', 'CTF_reseau_site');
 
 	if ($conn->connect_errno) {
 		die("Connexion a echoue". $conn->connect_errno);

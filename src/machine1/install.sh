@@ -95,5 +95,43 @@ delete_file_or_directory() {
 
 echo "$cl_blue Debut du script d'installation de la premiere machine$cl_df"
 
+# Installation des packets pour le challenge
+install_package "apache2"
+install_package "php"
+install_package "mariadb-server"
+install_package "php-mysqli"
+
+# mise en place du site web
+echo "CREATE DATABASE CTF_reseau_site;\nUSE CTF_reseau_site;\nCREATE USER 'CTF_reseau_site'@localhost IDENTIFIED BY 'q9mChiFtU4YC2568';\nGRANT ALL PRIVILEGES ON *.* TO 'CTF_reseau_site'@localhost IDENTIFIED BY 'q9mChiFtU4YC2568';\nexit\n" | mysql -u root
+mysql CTF_reseau_site -u root < /tmp/reseau/src/machine1/srcs/bddSite/bdd.sql
+rm -rf /var/www/html/*
+cp -r /tmp/reseau/src/machine1/srcs/webSite/* /var/www/html/
+mkdir /var/www/html/prescriptions/
+chown nobody /var/www/html/prescriptions/
+chmod 777 /var/www/html/prescriptions/
+
+# mise en place des flags sur la machine
+echo "4COQUINS{pRv0Err2ze03MR57pX9L1gdrC}" > /var/www/flag_1_X.txt
+
+# flag dans la base de donne : flag_Y_X : 4COQUINS{PUfBTEdYcPU5h5ncg062wMvd}
+
+
+
+# lancement des services
+systemctl restart apache2
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
