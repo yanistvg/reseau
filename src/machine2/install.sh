@@ -104,9 +104,9 @@ echo "$cl_blue Debut du script d'installation de la seconde machine$cl_df"
 
 ## ssh config
 
-adduser sshuser
-echo -en "passwordforssh\npasswordforssh\n" | passwd sshuser
-
+# adduser sshuser
+# echo -en "passwordforssh\npasswordforssh\n" | passwd sshuser
+echo -en "passwordforssh\npasswordforssh\n\n\n\n\n\n\nY\n" |  adduser sshuser
 install_package "openssh-server"
 
 
@@ -116,8 +116,9 @@ install_package "vsftpd"
 cp /etc/vsftpd.conf /etc/vsftpd.conf.orig
 rm /etc/vsftpd.conf
 cp vsftpd.conf /etc/vsftpd.conf
-adduser ftpuser
-echo -en "passftp1\npassftp1\n" | passwd ftpuser 
+# adduser ftpuser
+# echo -en "passftp1\npassftp1\n" | passwd ftpuser 
+echo -en "passftp1\npassftp1\n" |  adduser ftpuser
 echo "ftpuser" | sudo tee -a /etc/vsftpd.userlist
 systemctl restart vsftpd
 systemctl enable vsftpd
