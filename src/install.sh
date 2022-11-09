@@ -189,10 +189,12 @@ delete_file_or_directory() {
 	fi
 }
 echo "$cl_blue Installation de la machine $num_machine$cl_df"
+install_package "ssh"
 install_package "git"
 clone_repos_from_github
 sh "/tmp/reseau/src/machine$num_machine/install.sh" # lancement du script de la machine choisie
 delete_package "git"
+# delete_package "ssh"
 echo "" > /root/.ssh/known_hosts # oublier la connection git
 delete_file_or_directory "/tmp/id_rsa" # suppresion de la clef RSA
 delete_file_or_directory "/tmp/reseau" # suppresion du repos du git
