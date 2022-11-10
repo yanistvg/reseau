@@ -114,15 +114,14 @@ install_package "openssh-server"
 
 install_package "vsftpd"
 cp /etc/vsftpd.conf /etc/vsftpd.conf.orig
-rm /etc/vsftpd.conf
-cp vsftpd.conf /etc/vsftpd.conf
+# rm /etc/vsftpd.conf
+cat vsftpd.conf > /etc/vsftpd.conf
 # adduser ftpuser
 # echo -en "passftp1\npassftp1\n" | passwd ftpuser 
-echo -en "passftp1\npassftp1\n" |  adduser ftpuser
-echo "ftpuser" | sudo tee -a /etc/vsftpd.userlist
+echo -en "passftp1\npassftp1\n\n\n\n\n\n\nY\n" |  adduser ftpuser
+echo "ftpuser" | sudo tee -a /etc/vsftpd.userlistping 
 systemctl restart vsftpd
 systemctl enable vsftpd
-
 
 
 ## sed -i -e 's/\r$//' install.sh

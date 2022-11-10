@@ -25,4 +25,4 @@ delete_package() {
 delete_package "vsftpd"
 deluser --remove-home sshuser
 deluser --remove-home ftpuser
-rm /etc/vsftpd.conf.orig /etc/vsftpd.conf
+rm /etc/vsftpd.conf.orig /etc/vsftpd.conf  /etc/vsftpd.userlist 
