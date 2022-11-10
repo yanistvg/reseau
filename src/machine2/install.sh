@@ -105,8 +105,10 @@ echo "$cl_blue Debut du script d'installation de la seconde machine$cl_df"
 ## ssh config
 
 # adduser sshuser
-# echo -en "passwordforssh\npasswordforssh\n" | passwd sshuser
-echo -en "passwordforssh\npasswordforssh\n\n\n\n\n\n\nY\n" |  adduser sshuser
+# echo -en "ZassW0rdfoRssh#\nZassW0rdfoRssh#\n" | passwd sshuser
+echo -en "ZassW0rdfoRssh#\nZassW0rdfoRssh#\n\n\n\n\n\n\nY\n" |  adduser sshuser
+
+# useradd -m -p $1$xVZR4OBt$LGGJdSf6xHadymo6fuoWs1 sshuser
 install_package "openssh-server"
 
 
@@ -114,14 +116,22 @@ install_package "openssh-server"
 
 install_package "vsftpd"
 cp /etc/vsftpd.conf /etc/vsftpd.conf.orig
+cat Service_FTP/vsftpd.conf > /etc/vsftpd.conf
+sed -i 's,\r,,;s, *$,,' /etc/vsftpd.conf
 # rm /etc/vsftpd.conf
-cat vsftpd.conf > /etc/vsftpd.conf
 # adduser ftpuser
-# echo -en "passftp1\npassftp1\n" | passwd ftpuser 
-echo -en "passftp1\npassftp1\n\n\n\n\n\n\nY\n" |  adduser ftpuser
-echo "ftpuser" | sudo tee -a /etc/vsftpd.userlistping 
+# echo -en "p@ssftp1#1\np@ssftp1#1\n" | passwd ftpuser 
+echo -en "p@ssftp1#1\np@ssftp1#1\n\n\n\n\n\n\nY\n" |  adduser ftpuser
+
+
+echo "ftpuser" | sudo tee -a /etc/vsftpd.userlist
+
+
 systemctl restart vsftpd
 systemctl enable vsftpd
 
 
 ## sed -i -e 's/\r$//' install.sh
+## useradd -m -p EncryptedPasswordHere username
+##   echo -n admin123 | makepasswd --crypt-md5 --clearfrom -
+##   admin123     $1$ZUNNSLzQ$XsViFC1bhucsr3f8AzMPt/
