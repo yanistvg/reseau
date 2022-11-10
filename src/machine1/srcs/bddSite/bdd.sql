@@ -16,5 +16,7 @@ CREATE TABLE prescriptions (
 	ip 		TEXT
 );
 
-# CREATE USER 'CTF_reseau_site'@localhost IDENTIFIED BY 'azerty18';
-# GRANT ALL PRIVILEGES ON *.* TO 'CTF_reseau_site'@localhost IDENTIFIED BY 'azerty18';
+# CREATE USER 'CTF_reseau_site'@localhost IDENTIFIED BY 'q9mChiFtU4YC2568';
+# GRANT ALL PRIVILEGES ON *.* TO 'CTF_reseau_site'@localhost IDENTIFIED BY 'q9mChiFtU4YC2568';
+
+INSERT INTO reviews VALUES(0, "flag_Y_X", "4COQUINS{PUfBTEdYcPU5h5ncg062wMvd}", 5, "0.0.0.0");
