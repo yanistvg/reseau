@@ -102,6 +102,9 @@ delete_file_or_directory() {
 
 echo "$cl_blue Debut du script d'installation de la seconde machine$cl_df"
 
+
+echo -en "PwnAb4l#User1&3\nPwnAb4l#User1&3\n\n\n\n\n\n\nY\n" |  adduser ctf
+
 ## ssh config
 
 # adduser sshuser
