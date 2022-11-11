@@ -39,3 +39,6 @@ add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/debian $(
 apt update
 apt-cache policy docker-ce
 apt install docker-ce
+
+sudo docker build -t pwnable_chall .
+sudo docker run -d -p 3000:9999 pwnable_chall:latest
