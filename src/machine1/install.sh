@@ -95,13 +95,20 @@ delete_file_or_directory() {
 
 echo "$cl_blue Debut du script d'installation de la premiere machine$cl_df"
 
+root_pass="aMialox4fmEX8gxaw37oNCNe"
+debian_pass="QerwjkH6DEDAPMFM7wpD"
+
 # Installation des packets pour le challenge
 install_package "apache2"
 install_package "php"
 install_package "mariadb-server"
 install_package "php-mysqli"
+install_package "python"
+install_package "cron"
 
-# mise en place du site web
+#
+## Mise en place du site web pour la premier faille
+#
 echo "CREATE DATABASE CTF_reseau_site;\nUSE CTF_reseau_site;\nCREATE USER 'CTF_reseau_site'@localhost IDENTIFIED BY 'q9mChiFtU4YC2568';\nGRANT ALL PRIVILEGES ON *.* TO 'CTF_reseau_site'@localhost IDENTIFIED BY 'q9mChiFtU4YC2568';\nexit\n" | mysql -u root
 mysql CTF_reseau_site -u root < /tmp/reseau/src/machine1/srcs/bddSite/bdd.sql
 rm -rf /var/www/html/*
@@ -110,15 +117,42 @@ mkdir /var/www/html/prescriptions/
 chown nobody /var/www/html/prescriptions/
 chmod 777 /var/www/html/prescriptions/
 
-# mise en place des flags sur la machine
+#
+## Mise en place de l'elevation de privillege pour passer de l'utilisateur:
+## www-data -> debian -> root
+#
+echo "En cas de problème :\ndebian:QerwjkH6DEDAPMFM7wpD" > /var/www/rescuse.txt
+install -m =xs $(which python) /home/debian/
+chmod 700 /home/debian/
+echo "$root_pass\n$root_pass\n" | passwd root 			# changer le mot de passe de root
+echo "$debian_pass\n$debian_pass\n" | passwd debian 	# changer le mot de passe de debian
+echo "$root_pass\n" | groupmems -d debian -g sudo		# retirer debian des sudoer
+
+#
+## Mise en place des sauvegardes des logs
+#
+mkdir /.savelogs/													# dossier contenant les sauvegardes des logs apache
+echo "log keeper" > /.savelogs/11_11_22__15:40:01_log.txt			# fausse sauvegarde de log
+echo "log keeper" > /root/11_11_22__15:40:01_log.txt				# en cas de suppresion de la fausse log
+echo "" > /var/log/apache2/access.log 								# mise a zero des logs apaches
+echo "\n*/1 * * * * root /etc/cron.d/saveLog.sh" >> /etc/crontab	# ajoue d'un cron
+cp /tmp/reseau/src/machine1/srcs/saveLogScript/saveLog.sh /etc/cron.d/
+chmod +x /etc/cron.d/saveLog.sh
+
+#
+## Mise en place des flags sur la machine
+#
 echo "4COQUINS{pRv0Err2ze03MR57pX9L1gdrC}" > /var/www/flag_1_X.txt
+echo "4COQUINS{wZ2G8NQ0Wl7MAbysWu4Jw46kp}" > /home/debian/flag_2_X.txt
+echo "4COQUINS{MUmjobP5q6w2bDA5xnon6DD89}" > /root/flag_3_X.txt
 
-# flag dans la base de donne : flag_Y_X : 4COQUINS{PUfBTEdYcPU5h5ncg062wMvd}
-
-
+# flag dans la base de donne   : flag_Y_X : 4COQUINS{PUfBTEdYcPU5h5ncg062wMvd}
+# flag dans le fichier saveLog : flag_Y_X : 4COQUINS{29Se96dubhGAfE9yypyp3sMnc}
 
 # lancement des services
-systemctl restart apache2
+/etc/init.d/apache2 restart
+/etc/init.d/cron restart
+/etc/init.d/ssh restart
 
 
 
