@@ -1,15 +1,5 @@
 #!/bin/bash
 
-cl_black="\033[1;30m"
-cl_red="\033[1;31m"
-cl_green="\033[1;32m"
-cl_yellow="\033[1;33m"
-cl_blue="\033[1;34m"
-cl_purple="\033[1;35m"
-cl_cyan="\033[1;36m"
-cl_grey="\033[1;37m"
-cl_df="\033[0;m"
-
 install_package() {
 	if [ $# != 1 ]
 	then
@@ -45,7 +35,11 @@ apt-cache policy docker-ce
 # apt install docker-ce -y
 install_package "docker-ce"
 
+install_package "gcc"
 
-gcc --static /bin/pwnable_chall.c -o /bin/pwnable_chall
-sudo docker build -t pwnable_chall .
-sudo docker run -d -p 3000:9999 pwnable_chall:latest
+sudo bash -c 'echo 0 > /proc/sys/kernel/randomize_va_space'
+# gcc --static -fno-stack-protector /bin/pwnable_chall.c -o /bin/pwnable_chall
+## Buffer Overflow Using Return to Libc
+gcc --static -fno-stack-protector /bin/pwnable_chall.c -o /bin/pwnable_chall
+docker build -t pwnable_chall .
+docker run -d -p 3000:9999 pwnable_chall:latest
