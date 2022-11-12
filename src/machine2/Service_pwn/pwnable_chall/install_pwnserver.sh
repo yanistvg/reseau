@@ -32,13 +32,20 @@ install_package() {
 	fi
 }
 
-apt update
-apt install apt-transport-https ca-certificates curl gnupg2 software-properties-common
+echo "nameserver 8.8.8.8" > /etc/reresolv.conf
+apt update -y
+# apt install apt-transport-https ca-certificates -y curl gnupg2 software-properties-common
+install_package "apt-transport-https"
+install_package "ca-certificates"
+curl gnupg2 software-properties-common
 curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -
 add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/debian $(lsb_release -cs) stable"
-apt update
+apt update -y
 apt-cache policy docker-ce
-apt install docker-ce
+# apt install docker-ce -y
+install_package "docker-ce"
 
+
+gcc --static /bin/pwnable_chall.c -o /bin/pwnable_chall
 sudo docker build -t pwnable_chall .
 sudo docker run -d -p 3000:9999 pwnable_chall:latest
