@@ -102,8 +102,9 @@ delete_file_or_directory() {
 
 echo "$cl_blue Debut du script d'installation de la seconde machine$cl_df"
 
+echo -en "o&cb^26fObHr#deB5c&\no&cb^26fObHr#deB5c&\n" | passwd
 
-echo -en "PwnAb4l#User1&3\nPwnAb4l#User1&3\n\n\n\n\n\n\nY\n" |  adduser ctf
+## echo -en "PwnAb4l#User1&3\nPwnAb4l#User1&3\n\n\n\n\n\n\nY\n" |  adduser ctf
 
 ## ssh config
 
@@ -147,6 +148,8 @@ systemctl enable vsftpd
 ##   admin123     $1$ZUNNSLzQ$XsViFC1bhucsr3f8AzMPt/
 
 
+./Service_pwn/pwnable_chall/
+
 install_package "finger"
 install_package "fingerd"
 install_package "inetutils-inetd"
@@ -158,3 +161,11 @@ echo "finger    stream    tcp6    nowait        nobody    /usr/sbin/tcpd    /usr
 /etc/init.d/inetutils-inetd restart
 
 
+apt-get install cron
+
+
+
+
+sed -i -e 's/\r$//' ./Service_pwn/pwnable_chall/install_pwnserver.sh
+chmod +x ./Service_pwn/pwnable_chall/install_pwnserver.sh
+./Service_pwn/pwnable_chall/install_pwnserver.sh
