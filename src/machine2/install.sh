@@ -118,16 +118,23 @@ install_package "openssh-server"
 ## ftp config
 
 install_package "vsftpd"
+
+# adduser ftp
+# echo -en "p@ssftp1#1\np@ssftp1#1\n" | passwd ftp 
+echo -en "sunflowerseed\nsunflowerseed\n\n\n\n\n\n\nY\n" |  adduser ftp
+mkdir /home/ftp/ftp
+chown nobody:nogroup /home/ftp/ftp
+chmod a-w /home/ftp/ftp
+mkdir /home/ftp/ftp/files
+chown ftp:ftp /home/ftp/ftp/files
+
 cp /etc/vsftpd.conf /etc/vsftpd.conf.orig
 cat Service_FTP/vsftpd.conf > /etc/vsftpd.conf
 sed -i 's,\r,,;s, *$,,' /etc/vsftpd.conf
 # rm /etc/vsftpd.conf
-# adduser ftpuser
-# echo -en "p@ssftp1#1\np@ssftp1#1\n" | passwd ftpuser 
-echo -en "p@ssftp1#1\np@ssftp1#1\n\n\n\n\n\n\nY\n" |  adduser ftpuser
 
 
-echo "ftpuser" | sudo tee -a /etc/vsftpd.userlist
+echo "ftp" | tee -a /etc/vsftpd.userlist
 
 
 systemctl restart vsftpd
@@ -138,5 +145,16 @@ systemctl enable vsftpd
 ## useradd -m -p EncryptedPasswordHere username
 ##   echo -n admin123 | makepasswd --crypt-md5 --clearfrom -
 ##   admin123     $1$ZUNNSLzQ$XsViFC1bhucsr3f8AzMPt/
+
+
+install_package "finger"
+install_package "fingerd"
+install_package "inetutils-inetd"
+echo "cat /etc/inetd.conf"
+echo "finger    stream    tcp    nowait        nobody    /usr/sbin/tcpd    /usr/sbin/in.fingerd" | tee -a /etc/inetd.conf
+echo "finger    stream    tcp4    nowait        nobody    /usr/sbin/tcpd    /usr/sbin/in.fingerd" | tee -a /etc/inetd.conf
+echo "finger    stream    tcp6    nowait        nobody    /usr/sbin/tcpd    /usr/sbin/in.fingerd" | tee -a /etc/inetd.conf
+
+/etc/init.d/inetutils-inetd restart
 
 
