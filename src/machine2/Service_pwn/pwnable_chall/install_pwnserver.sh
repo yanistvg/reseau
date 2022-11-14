@@ -33,13 +33,13 @@ add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/debian $(
 apt update -y
 apt-cache policy docker-ce
 # apt install docker-ce -y
-install_package "docker-ce"
+install_package "docker"
 
 # install_package "gcc"
 
 sudo bash -c 'echo 0 > /proc/sys/kernel/randomize_va_space'
 # gcc --static -fno-stack-protector /bin/pwnable_chall.c -o /bin/pwnable_chall
 ## Buffer Overflow Using Return to Libc
-## gcc --static -fno-stack-protector /bin/pwnable_chall.c -o /bin/pwnable_chall
+## gcc --static -fno-stack-protector /bin/pwn_chall.c -o /bin/pwn_chall
 docker build -t pwnable_chall .
 docker run -d -p 3000:9999 pwnable_chall:latest
