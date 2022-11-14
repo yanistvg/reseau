@@ -24,16 +24,23 @@ install_package() {
 
 # echo "nameserver 8.8.8.8" > /etc/resolv.conf
 apt update -y
-# apt install apt-transport-https ca-certificates -y curl gnupg2 software-properties-common
-install_package "apt-transport-https"
-install_package "ca-certificates"
-curl gnupg2 software-properties-common
-curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -
+# # apt install apt-transport-https ca-certificates -y curl gnupg2 software-properties-common
+# install_package "apt-transport-https"
+# install_package "ca-certificates"
+# curl gnupg2 software-properties-common
+# curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -
+# add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/debian $(lsb_release -cs) stable"
+# apt update -y
+# apt-cache policy docker-ce
+# # apt install docker-ce -y
+# install_package "docker"
+
+apt install apt-transport-https ca-certificates curl gnupg2 software-properties-common
+curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add -
 add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/debian $(lsb_release -cs) stable"
 apt update -y
 apt-cache policy docker-ce
-# apt install docker-ce -y
-install_package "docker"
+apt install docker-ce
 
 # install_package "gcc"
 
