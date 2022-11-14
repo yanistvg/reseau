@@ -22,7 +22,7 @@ install_package() {
 	fi
 }
 
-echo "nameserver 8.8.8.8" > /etc/reresolv.conf
+# echo "nameserver 8.8.8.8" > /etc/resolv.conf
 apt update -y
 # apt install apt-transport-https ca-certificates -y curl gnupg2 software-properties-common
 install_package "apt-transport-https"

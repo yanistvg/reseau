@@ -128,6 +128,7 @@ chown nobody:nogroup /home/ftp/ftp
 chmod a-w /home/ftp/ftp
 mkdir /home/ftp/ftp/files
 chown ftp:ftp /home/ftp/ftp/files
+cp /tmp/reseau/src/machine2/Service_pwn/pwnable_chall/bin/executable.zip  /home/ftp/ftp/files
 
 cp /etc/vsftpd.conf /etc/vsftpd.conf.orig
 cat Service_FTP/vsftpd.conf > /etc/vsftpd.conf
@@ -142,14 +143,12 @@ systemctl restart vsftpd
 systemctl enable vsftpd
 
 
-## sed -i -e 's/\r$//' install.sh
-## useradd -m -p EncryptedPasswordHere username
-##   echo -n admin123 | makepasswd --crypt-md5 --clearfrom -
-##   admin123     $1$ZUNNSLzQ$XsViFC1bhucsr3f8AzMPt/
+/tmp/reseau/src/machine2/Service_pwn/pwnable_chall/
 
 
-./Service_pwn/pwnable_chall/
 
+
+## setup finger
 install_package "finger"
 install_package "fingerd"
 install_package "inetutils-inetd"
@@ -161,11 +160,18 @@ echo "finger    stream    tcp6    nowait        nobody    /usr/sbin/tcpd    /usr
 /etc/init.d/inetutils-inetd restart
 
 
-apt-get install cron
+## setup cron
+install_package "cron"
+echo "\n*/1 * * * * root /opt/clean.sh" >> /etc/crontab
+cp /tmp/reseau/src/machine2/clean.sh /opt/
+chmod +x /opt/clean.sh
 
 
 
+## run server pwnable
+sed -i -e 's/\r$//' /tmp/reseau/src/machine2/Service_pwn/pwnable_chall/install_pwnserver.sh
+chmod +x /tmp/reseau/src/machine2/Service_pwn/pwnable_chall/install_pwnserver.sh
+/tmp/reseau/src/machine2/Service_pwn/pwnable_chall/install_pwnserver.sh
 
-sed -i -e 's/\r$//' ./Service_pwn/pwnable_chall/install_pwnserver.sh
-chmod +x ./Service_pwn/pwnable_chall/install_pwnserver.sh
-./Service_pwn/pwnable_chall/install_pwnserver.sh
+
+## sed -i -e 's/\r$//' install.sh
