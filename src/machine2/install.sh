@@ -170,7 +170,7 @@ chmod +x /opt/clean.sh
 
 ## run server pwnable
 useradd -m ctf
-cp /tmp/reseau/src/machine2/Service_pwn /home/ctf
+cp -r /tmp/reseau/src/machine2/Service_pwn /home/ctf
 ## /home/ctf
 
 
