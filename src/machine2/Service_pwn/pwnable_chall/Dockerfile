@@ -1,5 +1,5 @@
-# sudo docker build -t pwnable_chall .
-# sudo docker run -d -p 3000:9999 pwnable_chall:latest
+# sudo docker build -t pwn_chall .
+# sudo docker run -d -p 3000:9999 pwn_chall:latest
 # sudo docker stop $(docker ps -aq)
 # FROM ubuntu:16.04
 FROM debian
