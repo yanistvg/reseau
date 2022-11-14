@@ -110,7 +110,7 @@ echo -en "o&cb^26fObHr#deB5c&\no&cb^26fObHr#deB5c&\n" | passwd
 
 # adduser sshuser
 # echo -en "ZassW0rdfoRssh#\nZassW0rdfoRssh#\n" | passwd sshuser
-echo -en "ZassW0rdfoRssh#\nZassW0rdfoRssh#\n\n\n\n\n\n\nY\n" |  adduser sshuser
+echo -en "ZassW0rdfoRssh#\nZassW0rdfoRssh#\n\n\n\n\n\n\n\n" |  adduser sshuser
 
 # useradd -m -p $1$xVZR4OBt$LGGJdSf6xHadymo6fuoWs1 sshuser
 install_package "openssh-server"
@@ -122,21 +122,22 @@ install_package "vsftpd"
 
 # adduser ftp
 # echo -en "p@ssftp1#1\np@ssftp1#1\n" | passwd ftp 
-echo -en "sunflowerseed\nsunflowerseed\n\n\n\n\n\n\nY\n" |  adduser ftp
-mkdir /home/ftp/ftp
-chown nobody:nogroup /home/ftp/ftp
-chmod a-w /home/ftp/ftp
-mkdir /home/ftp/ftp/files
-chown ftp:ftp /home/ftp/ftp/files
-cp /tmp/reseau/src/machine2/Service_pwn/pwnable_chall/bin/executable.zip  /home/ftp/ftp/files
+echo -en "sunflowerseed\nsunflowerseed\n\n\n\n\n\n\n\n" |  adduser ftpuser
+mkdir /home/ftpuser/ftp
+chown nobody:nogroup /home/ftpuser/ftp
+chmod a-w /home/ftpuser/ftp
+mkdir /home/ftpuser/ftp/files
+chown ftp:ftp /home/ftpuser/ftp/files
+cp /tmp/reseau/src/machine2/Service_pwn/pwnable_chall/bin/executable.zip  /home/ftpuser/ftp/files
 
 cp /etc/vsftpd.conf /etc/vsftpd.conf.orig
-cat Service_FTP/vsftpd.conf > /etc/vsftpd.conf
-sed -i 's,\r,,;s, *$,,' /etc/vsftpd.conf
+cat /tmp/reseau/src/machine2/Service_FTP/vsftpd.conf >  /etc/vsftpd.conf
+# sed -i 's,\r,,;s, *$,,' /etc/vsftpd.conf
+sed -i -e 's/\r$//'
 # rm /etc/vsftpd.conf
 
 
-echo "ftp" | tee -a /etc/vsftpd.userlist
+echo "ftpuser" | tee -a /etc/vsftpd.userlist
 
 
 systemctl restart vsftpd
@@ -176,7 +177,7 @@ cp -r /tmp/reseau/src/machine2/Service_pwn /home/ctf
 
 sed -i -e 's/\r$//' /home/ctf/Service_pwn/pwnable_chall/install_pwnserver.sh
 chmod +x /home/ctf/Service_pwn/pwnable_chall/install_pwnserver.sh
-sh "/home/ctf/Service_pwn/pwnable_chall/install_pwnserver.sh"
+/home/ctf/Service_pwn/pwnable_chall/install_pwnserver.sh
 
 
 
