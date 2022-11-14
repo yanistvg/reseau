@@ -35,7 +35,7 @@ RUN chmod +x /start.sh
 COPY ./bin/ /home/ctf/
 RUN chown -R root:ctf /home/ctf && \
     chmod -R 750 /home/ctf && \
-    chmod 740 /home/ctf/flag.txt
+    chmod 740 /home/ctf/flag_X_of_Y.txt
 
 CMD ["/start.sh"]
 

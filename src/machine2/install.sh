@@ -169,9 +169,15 @@ chmod +x /opt/clean.sh
 
 
 ## run server pwnable
-sed -i -e 's/\r$//' /tmp/reseau/src/machine2/Service_pwn/pwnable_chall/install_pwnserver.sh
-chmod +x /tmp/reseau/src/machine2/Service_pwn/pwnable_chall/install_pwnserver.sh
-sh "/tmp/reseau/src/machine2/Service_pwn/pwnable_chall/install_pwnserver.sh"
+useradd -m ctf
+cp /tmp/reseau/src/machine2/Service_pwn /home/ctf
+## /home/ctf
+
+
+sed -i -e 's/\r$//' /home/ctf/Service_pwn/pwnable_chall/install_pwnserver.sh
+chmod +x /home/ctf/Service_pwn/pwnable_chall/install_pwnserver.sh
+sh "/home/ctf/Service_pwn/pwnable_chall/install_pwnserver.sh"
+
 
 
 ## sed -i -e 's/\r$//' install.sh
