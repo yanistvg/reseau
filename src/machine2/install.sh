@@ -122,13 +122,13 @@ install_package "vsftpd"
 
 # adduser ftp
 # echo -en "p@ssftp1#1\np@ssftp1#1\n" | passwd ftp 
-echo -en "sunflowerseed\nsunflowerseed\n\n\n\n\ny\n" |  adduser ftpuser
-mkdir /home/ftpuser/ftp
-chown nobody:nogroup /home/ftpuser/ftp
-chmod a-w /home/ftpuser/ftp
-mkdir /home/ftpuser/ftp/files
-chown ftp:ftp /home/ftpuser/ftp/files
-cp /tmp/reseau/src/machine2/Service_pwn/pwnable_chall/bin/executable.zip  /home/ftpuser/ftp/files
+echo -en "sunflowerseed\nsunflowerseed\n\n\n\n\ny\n" |  adduser lucky
+mkdir /home/lucky/ftp
+chown nobody:nogroup /home/lucky/ftp
+chmod a-w /home/lucky/ftp
+mkdir /home/lucky/ftp/files
+chown ftp:ftp /home/lucky/ftp/files
+cp /tmp/reseau/src/machine2/Service_pwn/pwnable_chall/bin/executable.zip  /home/lucky/ftp/files
 
 cp /etc/vsftpd.conf /etc/vsftpd.conf.orig
 cat /tmp/reseau/src/machine2/Service_FTP/vsftpd.conf >  /etc/vsftpd.conf
@@ -137,7 +137,7 @@ sed -i -e 's/\r$//'
 # rm /etc/vsftpd.conf
 
 
-echo "ftpuser" | tee -a /etc/vsftpd.userlist
+echo "lucky" | tee -a /etc/vsftpd.userlist
 
 
 systemctl restart vsftpd
@@ -179,6 +179,11 @@ sed -i -e 's/\r$//' /home/ctf/Service_pwn/pwnable_chall/install_pwnserver.sh
 chmod +x /home/ctf/Service_pwn/pwnable_chall/install_pwnserver.sh
 /home/ctf/Service_pwn/pwnable_chall/install_pwnserver.sh
 
+
+
+## final flag
+## 4COQUINS{lDrApOsTERaTervEstATediSMICSI}
+cp flag_3_of_3.pdf /root
 
 
 ## sed -i -e 's/\r$//' install.sh

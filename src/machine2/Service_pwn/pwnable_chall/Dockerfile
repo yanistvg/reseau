@@ -40,3 +40,6 @@ RUN chown -R root:ctf /home/ctf && \
 CMD ["/start.sh"]
 
 EXPOSE 9999
+
+# RUN git clone https://github.com/niklasb/libc-database
+# RUN cd libc-database && ./get debian
