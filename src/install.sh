@@ -10,6 +10,8 @@ apt-get update
 #  : 1 -> installer la premiere machine
 #  : 2 -> installer la seconde machine
 num_machine="1"
+# apt update
+# num_machine="2"
 # Variables de couleur pour l'affichage
 cl_black="\033[1;30m"
 cl_red="\033[1;31m"
@@ -194,6 +196,7 @@ echo "$cl_blue Installation de la machine $num_machine$cl_df"
 install_package "ssh"
 install_package "git"
 clone_repos_from_github
+sed -i -e 's/\r$//' /tmp/reseau/src/machine$num_machine/install.sh
 sh "/tmp/reseau/src/machine$num_machine/install.sh" # lancement du script de la machine choisie
 delete_package "git"
 # delete_package "ssh"

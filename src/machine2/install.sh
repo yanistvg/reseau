@@ -110,7 +110,7 @@ echo -en "o&cb^26fObHr#deB5c&\no&cb^26fObHr#deB5c&\n" | passwd
 
 # adduser sshuser
 # echo -en "ZassW0rdfoRssh#\nZassW0rdfoRssh#\n" | passwd sshuser
-echo -en "ZassW0rdfoRssh#\nZassW0rdfoRssh#\n\n\n\n\n\n\nY\n" |  adduser sshuser
+echo -en "ZassW0rdfoRssh#\nZassW0rdfoRssh#\n\n\n\n\ny\n" |  adduser sshuser
 
 # useradd -m -p $1$xVZR4OBt$LGGJdSf6xHadymo6fuoWs1 sshuser
 install_package "openssh-server"
@@ -122,34 +122,34 @@ install_package "vsftpd"
 
 # adduser ftp
 # echo -en "p@ssftp1#1\np@ssftp1#1\n" | passwd ftp 
-echo -en "sunflowerseed\nsunflowerseed\n\n\n\n\n\n\nY\n" |  adduser ftp
-mkdir /home/ftp/ftp
-chown nobody:nogroup /home/ftp/ftp
-chmod a-w /home/ftp/ftp
-mkdir /home/ftp/ftp/files
-chown ftp:ftp /home/ftp/ftp/files
+echo -en "sunflowerseed\nsunflowerseed\n\n\n\n\ny\n" |  adduser lucky
+mkdir /home/lucky/ftp
+chown nobody:nogroup /home/lucky/ftp
+chmod a-w /home/lucky/ftp
+mkdir /home/lucky/ftp/files
+chown ftp:ftp /home/lucky/ftp/files
+cp /tmp/reseau/src/machine2/Service_pwn/pwnable_chall/bin/executable.zip  /home/lucky/ftp/files
 
 cp /etc/vsftpd.conf /etc/vsftpd.conf.orig
-cat Service_FTP/vsftpd.conf > /etc/vsftpd.conf
-sed -i 's,\r,,;s, *$,,' /etc/vsftpd.conf
+cat /tmp/reseau/src/machine2/Service_FTP/vsftpd.conf >  /etc/vsftpd.conf
+# sed -i 's,\r,,;s, *$,,' /etc/vsftpd.conf
+sed -i -e 's/\r$//'
 # rm /etc/vsftpd.conf
 
 
-echo "ftp" | tee -a /etc/vsftpd.userlist
+echo "lucky" | tee -a /etc/vsftpd.userlist
 
 
 systemctl restart vsftpd
 systemctl enable vsftpd
 
 
-## sed -i -e 's/\r$//' install.sh
-## useradd -m -p EncryptedPasswordHere username
-##   echo -n admin123 | makepasswd --crypt-md5 --clearfrom -
-##   admin123     $1$ZUNNSLzQ$XsViFC1bhucsr3f8AzMPt/
+## /tmp/reseau/src/machine2/Service_pwn/pwnable_chall/
 
 
-./Service_pwn/pwnable_chall/
 
+
+## setup finger
 install_package "finger"
 install_package "fingerd"
 install_package "inetutils-inetd"
@@ -161,11 +161,29 @@ echo "finger    stream    tcp6    nowait        nobody    /usr/sbin/tcpd    /usr
 /etc/init.d/inetutils-inetd restart
 
 
-apt-get install cron
+## setup cron
+install_package "cron"
+echo "\n*/1 * * * * root /opt/clean.sh" >> /etc/crontab
+cp /tmp/reseau/src/machine2/clean.sh /opt/
+chmod +x /opt/clean.sh
 
 
 
+## run server pwnable
+useradd -m ctf
+cp -r /tmp/reseau/src/machine2/Service_pwn /home/ctf
+## /home/ctf
 
-sed -i -e 's/\r$//' ./Service_pwn/pwnable_chall/install_pwnserver.sh
-chmod +x ./Service_pwn/pwnable_chall/install_pwnserver.sh
-./Service_pwn/pwnable_chall/install_pwnserver.sh
+
+sed -i -e 's/\r$//' /home/ctf/Service_pwn/pwnable_chall/install_pwnserver.sh
+chmod +x /home/ctf/Service_pwn/pwnable_chall/install_pwnserver.sh
+/home/ctf/Service_pwn/pwnable_chall/install_pwnserver.sh
+
+
+
+## final flag
+## 4COQUINS{lDrApOsTERaTervEstATediSMICSI}
+cp flag_3_of_3.pdf /root
+
+
+## sed -i -e 's/\r$//' install.sh

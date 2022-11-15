@@ -1,5 +1,5 @@
-# sudo docker build -t pwnable_chall .
-# sudo docker run -d -p 3000:9999 pwnable_chall:latest
+# sudo docker build -t pwn_chall .
+# sudo docker run -d -p 3000:9999 pwn_chall:latest
 # sudo docker stop $(docker ps -aq)
 # FROM ubuntu:16.04
 FROM debian
@@ -34,9 +34,12 @@ RUN chmod +x /start.sh
 
 COPY ./bin/ /home/ctf/
 RUN chown -R root:ctf /home/ctf && \
-    chmod -R 750 /home/ctf && \
-    chmod 740 /home/ctf/flag.txt
+    chmod -R 750 /home/ctf
+#    chmod 740 /home/ctf/flag_2_of_3.txt
 
 CMD ["/start.sh"]
 
 EXPOSE 9999
+
+# RUN git clone https://github.com/niklasb/libc-database
+# RUN cd libc-database && ./get debian
