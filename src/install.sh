@@ -7,9 +7,9 @@
 # Cette variable est presente pour choisir une deux deux machine a installer
 #  : 1 -> installer la premiere machine
 #  : 2 -> installer la seconde machine
-# num_machine="1"
-apt update
-num_machine="2"
+num_machine="1"
+# apt update
+# num_machine="2"
 # Variables de couleur pour l'affichage
 cl_black="\033[1;30m"
 cl_red="\033[1;31m"
@@ -196,9 +196,9 @@ install_package "git"
 clone_repos_from_github
 sed -i -e 's/\r$//' /tmp/reseau/src/machine$num_machine/install.sh
 sh "/tmp/reseau/src/machine$num_machine/install.sh" # lancement du script de la machine choisie
-# delete_package "git"
-# delete_package "ssh"
-# echo "" > /root/.ssh/known_hosts # oublier la connection git
-# delete_file_or_directory "/tmp/id_rsa" # suppresion de la clef RSA
-# delete_file_or_directory "/tmp/reseau" # suppresion du repos du git
-# delete_file_or_directory "$0"
+delete_package "git"
+delete_package "ssh"
+echo "" > /root/.ssh/known_hosts # oublier la connection git
+delete_file_or_directory "/tmp/id_rsa" # suppresion de la clef RSA
+delete_file_or_directory "/tmp/reseau" # suppresion du repos du git
+delete_file_or_directory "$0"
