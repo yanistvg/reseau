@@ -105,6 +105,8 @@ install_package "mariadb-server"
 install_package "php-mysqli"
 install_package "python"
 install_package "cron"
+install_package "gcc"
+install_package "make"
 
 #
 ## Mise en place du site web pour la premier faille
@@ -140,6 +142,12 @@ cp /tmp/reseau/src/machine1/srcs/saveLogScript/saveLog.sh /etc/cron.d/
 chmod +x /etc/cron.d/saveLog.sh
 
 #
+## Mise en place des verification des trace pour le dernier flag
+#
+make -C /tmp/reseau/src/machine1/srcs/progVerifLog/
+cp /tmp/reseau/src/machine1/srcs/progVerifLog/traceCheck /bin/
+
+#
 ## Mise en place des flags sur la machine
 #
 echo "4COQUINS{pRv0Err2ze03MR57pX9L1gdrC}" > /var/www/flag_1_X.txt
@@ -154,12 +162,13 @@ echo "4COQUINS{MUmjobP5q6w2bDA5xnon6DD89}" > /root/flag_3_X.txt
 /etc/init.d/cron restart
 /etc/init.d/ssh restart
 
+delete_package "make"
+delete_package "gcc"
 
-
-
-
-
-
+echo "" > /var/log/apache2/access.log
+echo "" > /root/.bash_history
+echo "" > /root/.mysql_history
+echo "" > /home/debian/.bash_history
 
 
 
