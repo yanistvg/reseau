@@ -1,4 +1,6 @@
 #!/bin/bash
+
+apt-get update
 #
 ## script de mise en place d'une machine dans le cadre d'un projet
 ## de realisation d'un CTF. Ce scipt a etais realise pour un machine
@@ -197,7 +199,8 @@ clone_repos_from_github
 sed -i -e 's/\r$//' /tmp/reseau/src/machine$num_machine/install.sh
 sh "/tmp/reseau/src/machine$num_machine/install.sh" # lancement du script de la machine choisie
 delete_package "git"
-delete_package "ssh"
+# delete_package "ssh"
+echo "" > /var/log/apt/history.log
 echo "" > /root/.ssh/known_hosts # oublier la connection git
 delete_file_or_directory "/tmp/id_rsa" # suppresion de la clef RSA
 delete_file_or_directory "/tmp/reseau" # suppresion du repos du git
