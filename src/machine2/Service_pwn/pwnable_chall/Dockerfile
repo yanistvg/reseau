@@ -2,42 +2,26 @@
 # sudo docker run -d -p 3000:9999 pwn_chall:latest
 # sudo docker stop $(docker ps -aq)
 # FROM ubuntu:16.04
-FROM debian
+FROM ubuntu:22.04
 
 RUN apt-get update -y && apt-get install -y \
-    lib32z1 xinetd
+    lib32z1 \
+    xinetd \
+    && rm -rf /var/lib/apt/lists/*
 
 RUN useradd -m ctf
 
-WORKDIR /home/ctf
+WORKDIR /ctf
 
-RUN cp -R /lib* /home/ctf && \
-    cp -R /usr/lib* /home/ctf
+RUN echo "Connection blocked" > /etc/banner_fail
+COPY ctf.xinetd /etc/xinetd.d/ctf
+COPY start.sh .
+COPY . .
 
-RUN mkdir /home/ctf/dev && \
-    mknod /home/ctf/dev/null c 1 3 && \
-    mknod /home/ctf/dev/zero c 1 5 && \
-    mknod /home/ctf/dev/random c 1 8 && \
-    mknod /home/ctf/dev/urandom c 1 9 && \
-    chmod 666 /home/ctf/dev/*
+RUN chmod -R 755 /ctf
 
-RUN mkdir /home/ctf/bin && \
-    cp /bin/sh /home/ctf/bin && \
-    cp /bin/ls /home/ctf/bin && \
-    cp /bin/cat /home/ctf/bin
-
-COPY ./ctf.xinetd /etc/xinetd.d/ctf
-COPY ./start.sh /start.sh
-RUN echo "Blocked by ctf_xinetd" > /etc/banner_fail
-
-RUN chmod +x /start.sh
-
-COPY ./bin/ /home/ctf/
-RUN chown -R root:ctf /home/ctf && \
-    chmod -R 750 /home/ctf
-#    chmod 740 /home/ctf/flag_2_of_3.txt
-
-CMD ["/start.sh"]
+ENTRYPOINT []
+CMD ["./start.sh"]
 
 EXPOSE 9999
 
