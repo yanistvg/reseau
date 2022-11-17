@@ -49,4 +49,4 @@ sudo bash -c 'echo 0 > /proc/sys/kernel/randomize_va_space'
 ## Buffer Overflow Using Return to Libc
 ## gcc --static -fno-stack-protector /bin/pwn_chall.c -o /bin/pwn_chall
 docker build -t pwn_chall /home/ctf/Service_pwn/pwnable_chall
-docker run -d -p 3000:9999 pwn_chall:latest
+docker run --privileged -d -p 3000:9999 pwn_chall:latest

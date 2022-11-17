@@ -5,7 +5,7 @@
 FROM ubuntu:16.04
 
 RUN apt-get update -y && apt-get install -y \
-    lib32z1 xinetd
+    lib32z1 xinetd vim
 
 RUN useradd -m ctf
 
@@ -28,9 +28,12 @@ RUN mkdir /home/ctf/bin && \
 
 COPY ./ctf.xinetd /etc/xinetd.d/ctf
 COPY ./start.sh /start.sh
+COPY ./code /code
 RUN echo "Blocked by ctf_xinetd" > /etc/banner_fail
 
 RUN chmod +x /start.sh
+RUN chown root:root /code
+RUN chmod u+s /code
 
 COPY ./bin/ /home/ctf/
 RUN chown -R root:ctf /home/ctf && \
