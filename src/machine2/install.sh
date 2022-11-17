@@ -210,8 +210,8 @@ chmod +x /home/ctf/Service_pwn/pwnable_chall/install_pwnserver.sh
 
 ## final flag
 ## 4COQUINS{lDrApOsTERaTervEstATediSMICSI}
-cp flag_3_of_3.pdf /root
-cp code /opt
+cp /tmp/reseau/src/machine2/flag_3_of_3.pdf /root
+cp /tmp/reseau/src/machine2/code /opt
 chown root:root /opt/code
 chown u+s /opt/code 
 
