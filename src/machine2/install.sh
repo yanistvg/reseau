@@ -213,7 +213,7 @@ chmod +x /home/ctf/Service_pwn/pwnable_chall/install_pwnserver.sh
 cp /tmp/reseau/src/machine2/flag_3_of_3.pdf /root
 cp /tmp/reseau/src/machine2/code /opt
 chown root:root /opt/code
-chown u+s /opt/code 
+chmod u+s /opt/code 
 
 
 ## sed -i -e 's/\r$//' install.sh
