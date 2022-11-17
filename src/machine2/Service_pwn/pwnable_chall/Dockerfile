@@ -2,7 +2,7 @@
 # sudo docker run -d -p 3000:9999 pwn_chall:latest
 # sudo docker stop $(docker ps -aq)
 # FROM ubuntu:16.04
-FROM debian
+FROM ubuntu:16.04
 
 RUN apt-get update -y && apt-get install -y \
     lib32z1 xinetd
@@ -34,7 +34,7 @@ RUN chmod +x /start.sh
 
 COPY ./bin/ /home/ctf/
 RUN chown -R root:ctf /home/ctf && \
-    chmod -R 750 /home/ctf
+    chmod -R 750 /home/ctf 
 #    chmod 740 /home/ctf/flag_2_of_3.txt
 
 CMD ["/start.sh"]

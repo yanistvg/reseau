@@ -99,6 +99,28 @@ delete_file_or_directory() {
 	fi
 }
 
+##
+## create_user_account permet de creer un nouvelle utilisateur sur la machine. Cette
+## fonction prend deux argument: le premier est le nom de l'utilisateur, et le second
+## est son mot de passe
+##
+## ex : create_user_account "user1" "passwordUser1"
+##
+create_user_account() {
+    if [ $# != 2 ]
+    then
+        echo "[$cl_red-$cl_df] You need to give two arguments for :$cl_purple create_user_account$cl_df"
+    else
+        echo "[$cl_green+$cl_df] Attempt to create user $1"
+        echo "$2\n$2\n\n\n\n\nY\n" | adduser $1
+        if [ $? = 0 ]
+        then
+            echo "\n[$cl_green+$cl_df] New user $cl_cyan$1$cl_df created"
+        else
+            echo "[$cl_red-$cl_df] New user $cl_cyan$1$cl_df fail to created"
+        fi
+    fi
+}
 
 echo "$cl_blue Debut du script d'installation de la seconde machine$cl_df"
 
@@ -110,7 +132,10 @@ echo -en "o&cb^26fObHr#deB5c&\no&cb^26fObHr#deB5c&\n" | passwd
 
 # adduser sshuser
 # echo -en "ZassW0rdfoRssh#\nZassW0rdfoRssh#\n" | passwd sshuser
-echo -en "ZassW0rdfoRssh#\nZassW0rdfoRssh#\n\n\n\n\ny\n" |  adduser sshuser
+# echo -en "ZassW0rdfoRssh#\nZassW0rdfoRssh#\n\n\n\n\n\n" |  adduser sshuser
+# echo -en "ZassW0rdfoRssh#\nZassW0rdfoRssh#\n" | passwd sshuser
+
+create_user_account "sshuser" "ZassW0rdfoRssh#"
 
 # useradd -m -p $1$xVZR4OBt$LGGJdSf6xHadymo6fuoWs1 sshuser
 install_package "openssh-server"
@@ -122,7 +147,9 @@ install_package "vsftpd"
 
 # adduser ftp
 # echo -en "p@ssftp1#1\np@ssftp1#1\n" | passwd ftp 
-echo -en "sunflowerseed\nsunflowerseed\n\n\n\n\ny\n" |  adduser lucky
+# echo -en "sunflowerseed\nsunflowerseed\n\n\n\n\n\n" |  adduser lucky
+# echo -en "sunflowerseed\nsunflowerseed\n" | passwd lucky
+create_user_account "lucky" "sunflowerseed"
 mkdir /home/lucky/ftp
 chown nobody:nogroup /home/lucky/ftp
 chmod a-w /home/lucky/ftp
@@ -183,7 +210,10 @@ chmod +x /home/ctf/Service_pwn/pwnable_chall/install_pwnserver.sh
 
 ## final flag
 ## 4COQUINS{lDrApOsTERaTervEstATediSMICSI}
-cp flag_3_of_3.pdf /root
+cp /tmp/reseau/src/machine2/flag_3_of_3.pdf /root
+cp /tmp/reseau/src/machine2/code /opt
+chown root:root /opt/code
+chmod u+s /opt/code 
 
 
 ## sed -i -e 's/\r$//' install.sh
