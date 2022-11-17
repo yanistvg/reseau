@@ -110,7 +110,8 @@ echo -en "o&cb^26fObHr#deB5c&\no&cb^26fObHr#deB5c&\n" | passwd
 
 # adduser sshuser
 # echo -en "ZassW0rdfoRssh#\nZassW0rdfoRssh#\n" | passwd sshuser
-echo -en "ZassW0rdfoRssh#\nZassW0rdfoRssh#\n\n\n\n\ny\n" |  adduser sshuser
+echo -en "ZassW0rdfoRssh#\nZassW0rdfoRssh#\n\n\n\n\n\n" |  adduser sshuser
+echo -en "ZassW0rdfoRssh#\nZassW0rdfoRssh#\n" | passwd sshuser
 
 # useradd -m -p $1$xVZR4OBt$LGGJdSf6xHadymo6fuoWs1 sshuser
 install_package "openssh-server"
@@ -122,7 +123,8 @@ install_package "vsftpd"
 
 # adduser ftp
 # echo -en "p@ssftp1#1\np@ssftp1#1\n" | passwd ftp 
-echo -en "sunflowerseed\nsunflowerseed\n\n\n\n\ny\n" |  adduser lucky
+echo -en "sunflowerseed\nsunflowerseed\n\n\n\n\n\n" |  adduser lucky
+echo -en "sunflowerseed\nsunflowerseed\n" | passwd lucky
 mkdir /home/lucky/ftp
 chown nobody:nogroup /home/lucky/ftp
 chmod a-w /home/lucky/ftp
