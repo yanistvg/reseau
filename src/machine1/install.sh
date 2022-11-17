@@ -123,12 +123,20 @@ chmod 777 /var/www/html/prescriptions/
 ## Mise en place de l'elevation de privillege pour passer de l'utilisateur:
 ## www-data -> debian -> root
 #
+# install -m =xs $(which python) /home/debian/
 echo "En cas de problème :\ndebian:QerwjkH6DEDAPMFM7wpD" > /var/www/rescuse.txt
-install -m =xs $(which python) /home/debian/
 chmod 700 /home/debian/
 echo "$root_pass\n$root_pass\n" | passwd root 			# changer le mot de passe de root
 echo "$debian_pass\n$debian_pass\n" | passwd debian 	# changer le mot de passe de debian
 echo "$root_pass\n" | groupmems -d debian -g sudo		# retirer debian des sudoer
+
+echo "\n\n\n" | ssh-keygen -b 4096
+cat /root/.ssh/id_rsa.pub > /root/.ssh/authorized_keys
+cp /root/.ssh/id_rsa /tmp/id_rsa_sshkey_root
+rm -rf /root/.ssh/id_rsa /root/.ssh/id_rsa.pub
+chmod 600 /root/.ssh/authorized_keys
+chmod +s $(which cp)
+# sed -i "5s/blablabla/" file
 
 #
 ## Mise en place des sauvegardes des logs
@@ -165,10 +173,10 @@ echo "4COQUINS{MUmjobP5q6w2bDA5xnon6DD89}" > /root/flag_3_X.txt
 delete_package "make"
 delete_package "gcc"
 
-echo "" > /var/log/apache2/access.log
-echo "" > /root/.bash_history
-echo "" > /root/.mysql_history
-echo "" > /home/debian/.bash_history
+cat /dev/null > /var/log/apache2/access.log
+cat /dev/null > /root/.bash_history
+cat /dev/null > /root/.mysql_history
+cat /dev/null > /home/debian/.bash_history
 
 
 

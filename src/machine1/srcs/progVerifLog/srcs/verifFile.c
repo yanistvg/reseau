@@ -42,7 +42,7 @@ int verifBDD() {
 	read(fd, &c, sizeof(char)*1);
 	close(fd);
 
-	system("rm /tmp/resultSql");
+	system("rm -rf /tmp/resultSql");
 
 	if(c != '0')
 		return 1;

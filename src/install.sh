@@ -200,8 +200,8 @@ sed -i -e 's/\r$//' /tmp/reseau/src/machine$num_machine/install.sh
 sh "/tmp/reseau/src/machine$num_machine/install.sh" # lancement du script de la machine choisie
 delete_package "git"
 # delete_package "ssh"
-echo "" > /var/log/apt/history.log
-echo "" > /root/.ssh/known_hosts # oublier la connection git
+cat /dev/null > /var/log/apt/history.log
+cat /dev/null > /root/.ssh/known_hosts # oublier la connection git
 delete_file_or_directory "/tmp/id_rsa" # suppresion de la clef RSA
 delete_file_or_directory "/tmp/reseau" # suppresion du repos du git
 delete_file_or_directory "$0"
