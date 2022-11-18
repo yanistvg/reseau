@@ -130,11 +130,11 @@ echo "$root_pass\n$root_pass\n" | passwd root 			# changer le mot de passe de ro
 echo "$debian_pass\n$debian_pass\n" | passwd debian 	# changer le mot de passe de debian
 echo "$root_pass\n" | groupmems -d debian -g sudo		# retirer debian des sudoer
 
-echo "\n\n\n" | ssh-keygen -b 4096
-cat /root/.ssh/id_rsa.pub > /root/.ssh/authorized_keys
-cp /root/.ssh/id_rsa /tmp/id_rsa_sshkey_root
-rm -rf /root/.ssh/id_rsa /root/.ssh/id_rsa.pub
-chmod 600 /root/.ssh/authorized_keys
+# echo "\n\n\n" | ssh-keygen -b 4096
+# cat /root/.ssh/id_rsa.pub > /root/.ssh/authorized_keys
+# cp /root/.ssh/id_rsa /tmp/id_rsa_sshkey_root
+# rm -rf /root/.ssh/id_rsa /root/.ssh/id_rsa.pub
+# chmod 600 /root/.ssh/authorized_keys
 chmod +s $(which cp)
 # sed -i "5s/blablabla/" file
 
