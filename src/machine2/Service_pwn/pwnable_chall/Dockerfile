@@ -38,7 +38,6 @@ RUN chmod u+s /code
 COPY ./bin/ /home/ctf/
 RUN chown -R root:ctf /home/ctf && \
     chmod -R 750 /home/ctf 
-#    chmod 740 /home/ctf/flag_2_of_3.txt
 
 CMD ["/start.sh"]
 

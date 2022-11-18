@@ -158,12 +158,12 @@ cp /tmp/reseau/src/machine1/srcs/progVerifLog/traceCheck /bin/
 #
 ## Mise en place des flags sur la machine
 #
-echo "4COQUINS{pRv0Err2ze03MR57pX9L1gdrC}" > /var/www/flag_1_X.txt
-echo "4COQUINS{wZ2G8NQ0Wl7MAbysWu4Jw46kp}" > /home/debian/flag_2_X.txt
-echo "4COQUINS{MUmjobP5q6w2bDA5xnon6DD89}" > /root/flag_3_X.txt
+echo "4COQUINS{pRv0Err2ze03MR57pX9L1gdrC}" > /var/www/flag_1_8.txt
+echo "4COQUINS{wZ2G8NQ0Wl7MAbysWu4Jw46kp}" > /home/debian/flag_2_8.txt
+echo "4COQUINS{MUmjobP5q6w2bDA5xnon6DD89}" > /root/flag_3_8.txt
 
-# flag dans la base de donne   : flag_Y_X : 4COQUINS{PUfBTEdYcPU5h5ncg062wMvd}
-# flag dans le fichier saveLog : flag_Y_X : 4COQUINS{29Se96dubhGAfE9yypyp3sMnc}
+# flag dans la base de donne   : flag_7_8 : 4COQUINS{PUfBTEdYcPU5h5ncg062wMvd}
+# flag dans le fichier saveLog : flag_8_8 : 4COQUINS{29Se96dubhGAfE9yypyp3sMnc}
 
 # lancement des services
 /etc/init.d/apache2 restart
