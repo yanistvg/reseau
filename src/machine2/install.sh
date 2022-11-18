@@ -135,10 +135,10 @@ echo -en "o&cb^26fObHr#deB5c&\no&cb^26fObHr#deB5c&\n" | passwd
 # echo -en "ZassW0rdfoRssh#\nZassW0rdfoRssh#\n\n\n\n\n\n" |  adduser sshuser
 # echo -en "ZassW0rdfoRssh#\nZassW0rdfoRssh#\n" | passwd sshuser
 
-create_user_account "sshuser" "ZassW0rdfoRssh#"
+# create_user_account "sshuser" "ZassW0rdfoRssh#"
 
 # useradd -m -p $1$xVZR4OBt$LGGJdSf6xHadymo6fuoWs1 sshuser
-install_package "openssh-server"
+# install_package "openssh-server"
 
 
 ## ftp config
