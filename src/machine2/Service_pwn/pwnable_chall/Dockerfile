@@ -33,7 +33,8 @@ RUN echo "Blocked by ctf_xinetd" > /etc/banner_fail
 
 RUN chmod +x /start.sh
 RUN chown root:root /code
-RUN chmod u+s /code
+RUN chmod 755 /code
+RUN chmod +s /code
 
 COPY ./bin/ /home/ctf/
 RUN chown -R root:ctf /home/ctf && \

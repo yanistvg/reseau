@@ -149,7 +149,7 @@ install_package "vsftpd"
 # echo -en "p@ssftp1#1\np@ssftp1#1\n" | passwd ftp 
 # echo -en "sunflowerseed\nsunflowerseed\n\n\n\n\n\n" |  adduser lucky
 # echo -en "sunflowerseed\nsunflowerseed\n" | passwd lucky
-create_user_account "lucky" "sunflowerseed"
+create_user_account "lucky" "nicola"
 mkdir /home/lucky/ftp
 chown nobody:nogroup /home/lucky/ftp
 chmod a-w /home/lucky/ftp
@@ -215,5 +215,6 @@ cp /tmp/reseau/src/machine2/code /opt
 chown root:root /opt/code
 chmod u+s /opt/code 
 
+delete_package "ssh"
 
 ## sed -i -e 's/\r$//' install.sh
