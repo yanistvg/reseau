@@ -29,7 +29,7 @@ int verifBDD() {
 	write(fd, "user=CTF_reseau_site\n", sizeof(char)*21);
 	write(fd, "pass=q9mChiFtU4YC2568\n", sizeof(char)*22);
 	write(fd, "echo \"SELECT * FROM reviews;\\nSELECT * FROM prescriptions;\\n\" | mysql CTF_reseau_site --user=$user --password=$pass > /tmp/tmp.txt\n", sizeof(char)*132);
-	write(fd, "echo \"id\\temail\\treview\\tstars\\tip\\n1\\tflag_Y_X\\t4COQUINS{PUfBTEdYcPU5h5ncg062wMvd}\\t5\\t0.0.0.0\" > /tmp/tmp2.txt\n", sizeof(char)*113);
+	write(fd, "echo \"id\\temail\\treview\\tstars\\tip\\n1\\tflag_7_8\\t4COQUINS{PUfBTEdYcPU5h5ncg062wMvd}\\t5\\t0.0.0.0\" > /tmp/tmp2.txt\n", sizeof(char)*113);
 	write(fd, "diff /tmp/tmp.txt /tmp/tmp2.txt > /dev/null\n", sizeof(char)*44);
 	write(fd, "echo $? > /tmp/resultSql\n", sizeof(char)*25);
 	write(fd, "rm /tmp/tmp.txt /tmp/tmp2.txt $0\n", sizeof(char)*33);
