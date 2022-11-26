@@ -1,11 +1,12 @@
 # sudo docker build -t pwn_chall .
-# sudo docker run -d -p 3000:9999 pwn_chall:latest
+# sudo docker run --privileged -d -p 3000:9999 pwn_chall:latest
 # sudo docker stop $(docker ps -aq)
-# FROM ubuntu:16.04
+# sudo docker rm $(docker ps -aq)
+
 FROM ubuntu:16.04
 
 RUN apt-get update -y && apt-get install -y \
-    lib32z1 xinetd vim
+    lib32z1 xinetd vim xclip
 
 RUN useradd -m ctf
 
@@ -33,7 +34,8 @@ RUN echo "Blocked by ctf_xinetd" > /etc/banner_fail
 
 RUN chmod +x /start.sh
 RUN chown root:root /code
-RUN chmod u+s /code
+RUN chmod 755 /code
+RUN chmod +s /code
 
 COPY ./bin/ /home/ctf/
 RUN chown -R root:ctf /home/ctf && \
