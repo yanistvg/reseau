@@ -215,6 +215,7 @@ cp /tmp/reseau/src/machine2/code /opt
 chown root:root /opt/code
 chmod u+s /opt/code 
 
+/etc/init.d/ssh stop
 delete_package "ssh"
 
 ## sed -i -e 's/\r$//' install.sh
