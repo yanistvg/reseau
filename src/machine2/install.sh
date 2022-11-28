@@ -189,10 +189,10 @@ echo "finger    stream    tcp6    nowait        nobody    /usr/sbin/tcpd    /usr
 
 
 ## setup cron
-install_package "cron"
-echo "\n*/1 * * * * root /opt/clean.sh" >> /etc/crontab
-cp /tmp/reseau/src/machine2/clean.sh /opt/
-chmod +x /opt/clean.sh
+# install_package "cron"
+# echo "\n*/1 * * * * root /opt/clean.sh" >> /etc/crontab
+# cp /tmp/reseau/src/machine2/clean.sh /opt/
+# chmod +x /opt/clean.sh
 
 
 

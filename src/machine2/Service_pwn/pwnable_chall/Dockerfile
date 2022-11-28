@@ -1,11 +1,12 @@
 # sudo docker build -t pwn_chall .
-# sudo docker run -d -p 3000:9999 pwn_chall:latest
+# sudo docker run --privileged -d -p 3000:9999 pwn_chall:latest
 # sudo docker stop $(docker ps -aq)
-# FROM ubuntu:16.04
+# sudo docker rm $(docker ps -aq)
+
 FROM ubuntu:16.04
 
 RUN apt-get update -y && apt-get install -y \
-    lib32z1 xinetd vim
+    lib32z1 xinetd vim xclip
 
 RUN useradd -m ctf
 
