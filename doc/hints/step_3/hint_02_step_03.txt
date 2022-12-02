@@ -1,0 +1,4 @@
+msg1 = Pour trouver cette indice, il faut bien avoir suivie les cours de cryptographie
+base64(k XOR msg1) = KFxAInoiNDoUTw4mSFYuAQxWFTk0Mi82BBVLPQQVLRQNRxUyMzModQBPBD0aFTgAEUVcNXo6IyZBWgQhGkZrER0TViIjJjI6BksKJABcLg==
+
+base64(k XOR hint) = EEdBIClsaXoGTQ07ClwlBlZUXCQyIyR7CFZEdB5UawMXRkZwKjM0OARNHyYNFS8QWEdHPy8gIydBXQ4nSFAzBRRcXCQ7Ii86DxkPMRsVOwcXVEcxNzsjJkFIHj1IViQbDFpQPjQzKCFBXQ50O2ACMQ==

@@ -9,4 +9,4 @@ then
 	echo "" > /var/log/apache2/access.log
 fi
 rm /tmp/emptyFile
-# flag_Y_X : 4COQUINS{29Se96dubhGAfE9yypyp3sMnc}
+# flag_8_8 : 4COQUINS{29Se96dubhGAfE9yypyp3sMnc}
