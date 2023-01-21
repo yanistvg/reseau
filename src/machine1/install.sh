@@ -128,8 +128,8 @@ echo "En cas de problème :\ndebian:QerwjkH6DEDAPMFM7wpD" > /var/www/rescuse.txt
 chmod 700 /home/debian/
 echo "$root_pass\n$root_pass\n" | passwd root 			# changer le mot de passe de root
 echo "$debian_pass\n$debian_pass\n" | passwd debian 	# changer le mot de passe de debian
-echo "$root_pass\n" | groupmems -d debian -g sudo		# retirer debian des sudoer
-
+#echo "$root_pass\n" | groupmems -d debian -g sudo		# retirer debian des sudoer
+apt remove -y sudo
 # echo "\n\n\n" | ssh-keygen -b 4096
 # cat /root/.ssh/id_rsa.pub > /root/.ssh/authorized_keys
 # cp /root/.ssh/id_rsa /tmp/id_rsa_sshkey_root
