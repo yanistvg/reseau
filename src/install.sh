@@ -205,3 +205,9 @@ cat /dev/null > /root/.ssh/known_hosts # oublier la connection git
 delete_file_or_directory "/tmp/id_rsa" # suppresion de la clef RSA
 delete_file_or_directory "/tmp/reseau" # suppresion du repos du git
 delete_file_or_directory "$0"
+
+####
+## Suppression des script specifiquement sur Opens-Stack
+####
+rm -rf /var/lib/cloud/instances/*/scripts/*
+rm -rf /var/lib/cloud/instances/*/user-data.txt
