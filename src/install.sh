@@ -84,6 +84,7 @@ delete_package() {
 ## localisation file : /tmp/id_rsa
 ##
 create_file_sshKey_for_github() {
+## La clef n'est plus active
 	touch /tmp/id_rsa
 	if [ $? != 0 ]
 	then
@@ -153,18 +154,29 @@ mJ+q4pYEPAEAAAAVeWFuaXNnZW55dHZAZ21haWwuY29tAQIDBAUG
 ## de la machine comme un site internet
 ##
 clone_repos_from_github() {
-	create_file_sshKey_for_github
-	if [ ! -e /tmp/id_rsa ]
+#	create_file_sshKey_for_github
+#	if [ ! -e /tmp/id_rsa ]
+#	then
+#		echo "[$cl_red-$cl_green] Without file /tmp/id_rsa we cannot clone git repos"
+#	else
+#		GIT_SSH_COMMAND='ssh -i /tmp/id_rsa -o StrictHostKeyChecking=no' git clone git@github.com:yanistvg/reseau.git "/tmp/reseau" -q > /dev/null
+#		if [ $? != 0 ]
+#		then
+#			echo "[$cl_red-$cl_df] Fail to clone the git repos"
+#		else
+#			echo "[$cl_green+$cl_df] The git repos was clone with successful"
+#		fi
+#	fi
+
+###########################################
+### Changement repos de prive a public
+###########################################
+	git clone https://github.com/yanistvg/reseau.git "/tmp/reseau" -q > /dev/null
+	if [ $? != 0 ]
 	then
-		echo "[$cl_red-$cl_green] Without file /tmp/id_rsa we cannot clone git repos"
+		echo "[$cl_red-$cl_df] Fail to clone the git repos"
 	else
-		GIT_SSH_COMMAND='ssh -i /tmp/id_rsa -o StrictHostKeyChecking=no' git clone git@github.com:yanistvg/reseau.git "/tmp/reseau" -q > /dev/null
-		if [ $? != 0 ]
-		then
-			echo "[$cl_red-$cl_df] Fail to clone the git repos"
-		else
-			echo "[$cl_green+$cl_df] The git repos was clone with successful"
-		fi
+		echo "[$cl_green+$cl_df] The git repos was clone with successful"
 	fi
 }
 ##
@@ -202,7 +214,7 @@ delete_package "git"
 # delete_package "ssh"
 cat /dev/null > /var/log/apt/history.log
 cat /dev/null > /root/.ssh/known_hosts # oublier la connection git
-delete_file_or_directory "/tmp/id_rsa" # suppresion de la clef RSA
+# delete_file_or_directory "/tmp/id_rsa" # suppresion de la clef RSA
 delete_file_or_directory "/tmp/reseau" # suppresion du repos du git
 delete_file_or_directory "$0"
 
